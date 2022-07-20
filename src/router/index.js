@@ -10,9 +10,9 @@ const addShop = r => require.ensure([], () => r(require('@/page/addShop')), 'add
 const addGoods = r => require.ensure([], () => r(require('@/page/addGoods')), 'addGoods');
 const userList = r => require.ensure([], () => r(require('@/page/userList')), 'userList');
 const shopList = r => require.ensure([], () => r(require('@/page/shopList')), 'shopList');
-const foodList = r => require.ensure([], () => r(require('@/page/foodList')), 'foodList');
+const ssh = r => require.ensure([], () => r(require('@/page/ssh')), 'ssh');
 const orderList = r => require.ensure([], () => r(require('@/page/orderList')), 'orderList');
-const adminList = r => require.ensure([], () => r(require('@/page/adminList')), 'adminList');
+const sshlogin = r => require.ensure([], () => r(require('@/page/sshlogin')), 'sshlogin');
 const visitor = r => require.ensure([], () => r(require('@/page/visitor')), 'visitor');
 const newMember = r => require.ensure([], () => r(require('@/page/newMember')), 'newMember');
 const uploadImg = r => require.ensure([], () => r(require('@/page/uploadImg')), 'uploadImg');
@@ -51,18 +51,19 @@ const routes = [
 			component: shopList,
 			meta: ['数据管理', '商家列表'],
 		},{
-			path: '/foodList',
-			component: foodList,
-			meta: ['数据管理', '食品列表'],
-		},{
 			path: '/orderList',
 			component: orderList,
 			meta: ['数据管理', '订单列表'],
 		},{
-			path: '/adminList',
-			component: adminList,
-			meta: ['数据管理', '管理员列表'],
+			path: '/sshlogin',
+			component: sshlogin,
+			meta: ['数据管理', '终端登录'],
 		},{
+			path: '/ssh',
+			component: ssh,
+			meta: ['数据管理', '终端窗口'],
+		},
+		{
 			path: '/visitor',
 			component: visitor,
 			meta: ['图表', '用户分布'],
