@@ -8,11 +8,22 @@ const state = {
 	adminInfo: {
 		avatar: 'default.jpg'
 	},
+	sshlogin:{
+		
+	}
 }
 
 const mutations = {
 	saveAdminInfo(state, adminInfo){
 		state.adminInfo = adminInfo;
+	},
+	saveSSHLoginInfo(state, sshlogin){
+		state.sshlogin = sshlogin;
+	}
+}
+const getInfo = {
+	getSSHLoginInfo(state) {
+		return state.sshlogin
 	}
 }
 
@@ -32,6 +43,7 @@ const actions = {
 }
 
 export default new Vuex.Store({
+	getInfo,
 	state,
 	actions,
 	mutations,

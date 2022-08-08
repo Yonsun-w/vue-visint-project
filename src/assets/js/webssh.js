@@ -3,12 +3,14 @@ export function WSSHClient() {
 
 
 var host = '101.34.221.238:8088'
+
 WSSHClient.prototype._generateEndpoint = function () {
     var protocol = 'ws://';
     if (window.location.protocol === 'https:') {
         protocol = 'wss://';
     }
-    var endpoint = protocol + host + '/webssh';
+     var endpoint = protocol + host + '/webssh';
+
     return endpoint;
 };
 
@@ -18,7 +20,6 @@ WSSHClient.prototype.connect = function (options) {
     if (window.WebSocket) {
         //如果支持websocket
         this._connection = new WebSocket(endpoint);
-        console.log('连接ok')
     } else {
         //否则报错
         options.onError('WebSocket Not Supported');
@@ -27,7 +28,6 @@ WSSHClient.prototype.connect = function (options) {
 
     this._connection.onopen = function () {
         options.onConnect();
-        console.log('开始连接')
 
     };
 
@@ -35,7 +35,6 @@ WSSHClient.prototype.connect = function (options) {
         var data = evt.data.toString();
         //data = base64.decode(data);
         options.onData(data);
-        console.log('收到数据')
 
     };
 

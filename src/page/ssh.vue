@@ -2,28 +2,27 @@
     <div class="fillcontain">
         <head-top></head-top>
         
-       <el-button @click="myconsole">连接终端</el-button>
+       <el-button @click="attchssh">连接</el-button>
       <div id="terminal" style="width: 100%;height: 100%"></div>
     </div>
 </template>
 
 <script>
     import headTop from '@/components/headTop'
-    import storage from '@/store/sshstore'
     import '../assets/js/xterm.js'
     import '../assets/js/webssh.js'
-    // import { Terminal } from 'xterm'
     import 'xterm/css/xterm.css'
     import { WSSHClient } from '../assets/js/webssh.js'
-    import { FitAddon } from 'xterm-addon-fit'
+    import storage from '@//store/index'
 
     export default {
         data(){
             return {
-                connectData:localStorage.getItem("connectData")
+                connectData:JSON.stringify(storage.state.sshlogin)
             }
         },
         created(){
+            openTerminal(this.connectData)
         },
         computed: {
         
@@ -32,7 +31,7 @@
     		headTop,
     	},
         methods: {
-        openTerminal(my_json){
+        openTerminal(connectData){
         var client = new WSSHClient();
         let term = new Terminal({
             cols: 97,
@@ -45,6 +44,7 @@
         });
         term.on('data', function (data) {
             //键盘输入时的回调函数
+            console.log('键盘输入了' + data)
             client.sendClientData(data);
         });
         term.open(document.getElementById('terminal'));
@@ -55,19 +55,15 @@
             onError: function (error) {
                 //连接失败回调
                 term.writeln('Error: ' + error + '\r\n');
-                               console.log('onConnect')
 
             },
             onConnect: function () {
                 //连接成功回调
-             console.log('onConnect success',my_json)
-               console.log('onConnect success')
-               client.sendInitData(my_json);
+              client.sendInitData(connectData);
             },
             onClose: function () {
                 //连接关闭回调
                 term.write("\rconnection closed");
-                console.log('connection closed')
 
             },
             onData: function (data) {
@@ -76,12 +72,10 @@
                     window.localStorage.clear();
                 }
                 term.write(data);
-                console.log('data')
             }
         });
     },
-                myconsole: function () {
-                console.log(JSON.parse(this.connectData));
+                attchssh: function () {
                 this.openTerminal(JSON.parse(this.connectData));
             }
 }

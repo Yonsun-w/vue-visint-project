@@ -5,10 +5,10 @@
 				<el-menu :default-active="defaultActive" style="min-height: 100%;" theme="dark" router>
 					<el-menu-item index="manage"><i class="el-icon-menu"></i>首页</el-menu-item>
 					<el-submenu index="2">
-						<template slot="title"><i class="el-icon-document"></i>数据管理</template>
-						<el-menu-item index="userList">用户列表</el-menu-item>
-						<el-menu-item index="shopList">商家列表</el-menu-item>
-						<el-menu-item index="orderList">订单列表</el-menu-item>
+						<template slot="title"><i class="el-icon-document"></i>终端管理</template>
+						<el-menu-item index="map">地图可视化</el-menu-item>
+						<!-- <el-menu-item index="shopList">商家列表</el-menu-item>
+						<el-menu-item index="orderList">订单列表</el-menu-item>  -->
 						<el-menu-item index="sshlogin">ssh登陆信息</el-menu-item>
 					    <el-menu-item index="ssh">终端界面</el-menu-item>
 					</el-submenu>
